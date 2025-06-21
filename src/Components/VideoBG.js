@@ -3,9 +3,10 @@ import { useSelector } from "react-redux";
 import useMovieTrailer from "../Hooks/useMovieTrailer";
 
 const VideoBG = ({ moiveId }) => {
-  const trailerVideo = useSelector((state) => state.movies?.trailerVideo);
-
   useMovieTrailer(moiveId);
+  const trailerVideo = useSelector(
+    (state) => state.movies?.trailerVideos?.[moiveId]
+  );
 
   if (!trailerVideo?.key) return null;
 
@@ -18,11 +19,9 @@ const VideoBG = ({ moiveId }) => {
         allow="autoplay; fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       ></iframe>
 
-      {/* Gradient overlay for better readability */}
       <div className="absolute top-0 left-0 w-full h-full opacity-80"></div>
     </div>
   );
 };
 
 export default VideoBG;
- 

@@ -2,11 +2,17 @@ import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closePopup } from "../utils/popupSlice";
 import { IMG_CDN_URL } from "../utils/Constants/Constant";
+import useMovieTrailer from "../Hooks/useMovieTrailer";
+import { clearTrailerVideos } from "../utils/movieSlice";
 
 const MoviePopup = () => {
   const dispatch = useDispatch();
   const { selectedMovie } = useSelector((state) => state.popup);
-  const trailerVideo = useSelector((state) => state.movies?.trailerVideo);
+  const trailerVideo = useSelector(
+    (state) => state.movies?.trailerVideos?.[selectedMovie?.id]
+  );
+
+  useMovieTrailer(selectedMovie?.id);
 
   const popupRef = useRef(null); // Reference to the popup card
 
@@ -26,7 +32,7 @@ const MoviePopup = () => {
 
   if (!selectedMovie) return null;
   if (!trailerVideo?.key) return null;
-
+  if (!selectedMovie || !trailerVideo?.key) return null;
   return (
     <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex justify-center items-center px-2 sm:px-4 ">
       <div
@@ -35,7 +41,10 @@ const MoviePopup = () => {
       >
         {/* ❌ Close button */}
         <button
-          onClick={() => dispatch(closePopup())}
+          onClick={() => {
+            dispatch(closePopup());
+            dispatch(clearTrailerVideos());
+          }}
           className="absolute top-2 right-2 text-gray-600 hover:text-black text-xl font-bold"
         >
           &times;
