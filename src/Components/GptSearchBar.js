@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { LANG } from "../utils/language";
-import ai from "../utils/Constants/OpenAi";
+
 import { API_OPTIONS } from "../utils/Constants/Constant";
 import { useDispatch } from "react-redux";
 import { addGptMovieResult } from "../utils/GptSlice";
@@ -26,25 +26,26 @@ const GptSearchBar = ({ selectedLang }) => {
 
   const handleGptSearchClick = async () => {
     console.log("GPT Search:", searchText.current.value);
-    const GPT_Query =
+    const prompt =
       "Act as a Movie Recommendation system and suggest some movies for the query: " +
       searchText.current.value +
-      ". only give me names of 5 movies, comma separated like the example result given ahead. Example Results: Gadar, Sholay, Don, Koi mil gaya, Golmaal";
+      ". Only give me names of 5 movies, comma separated like: Gadar, Sholay, Don, Koi mil gaya, Golmaal";
 
-    const gptResults = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: GPT_Query,
+    const res = await fetch("https://netflix-backend-p65a.onrender.com/api/gpt", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt }),
     });
 
-    // console.log("GPT Results:", gptResults?.text);
-    const GEM_MOVIE_LIST = gptResults?.text.split(",");
-    // console.log("GEM Movie List:", GEM_MOVIE_LIST);
+    const data = await res.json();
+    console.log("GPT Movie List:", data.text);
+    const GEM_MOVIE_LIST = data.text.split(",");
 
-    // for each Movie I will search for movie details from IMDb API
-    const promisArray = GEM_MOVIE_LIST.map((movie) => searchMovieTMDB(movie));
+    const promiseArray = GEM_MOVIE_LIST.map((movie) =>
+      searchMovieTMDB(movie.trim())
+    );
 
-    const movieDetails = await Promise.all(promisArray);
-    console.log("Movie Details:", movieDetails);
+    const movieDetails = await Promise.all(promiseArray);
 
     dispatch(
       addGptMovieResult({
