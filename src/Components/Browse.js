@@ -46,6 +46,7 @@ const Browse = () => {
       {/* 🔥 Header */}
       <header className="fixed top-0 left-0 w-full flex flex-col sm:flex-row items-center sm:justify-between gap-3 sm:gap-0 px-4 sm:px-6 py-3 bg-gradient-to-b from-black/100 to-transparent z-50">
         {/* Netflix Logo */}
+
         <img
           className="w-24 sm:w-28 md:w-36"
           src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
@@ -74,7 +75,7 @@ const Browse = () => {
             onClick={handleGptSearchClick}
             className="bg-purple-600 hover:bg-green-700 text-white font-semibold text-xs sm:text-sm px-3 py-1.5 rounded shadow transition w-28 sm:w-auto"
           >
-            {showGPTSearch ? "Search Page" : "GPT Search"}
+            {showGPTSearch ? "Home Page" : "GPT Search"}
           </button>
 
           {/* Display Name */}
