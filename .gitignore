@@ -28,7 +28,7 @@ yarn-error.log*
 **/.firebase
 
 # Constant.js
-**/src/utils/Constants/Constant.js
-**/src/utils/Constants/OpenAi.js
+
+
 
 /Docs
