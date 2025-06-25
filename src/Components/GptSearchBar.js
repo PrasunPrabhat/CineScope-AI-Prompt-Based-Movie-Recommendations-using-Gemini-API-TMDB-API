@@ -25,7 +25,7 @@ const GptSearchBar = ({ selectedLang }) => {
   };
 
   const handleGptSearchClick = async () => {
-    console.log("GPT Search:", searchText.current.value);
+    // console.log("GPT Search:", searchText.current.value);
     const prompt =
       "Act as a Movie Recommendation system and suggest some movies for the query: " +
       searchText.current.value +
@@ -38,7 +38,7 @@ const GptSearchBar = ({ selectedLang }) => {
     });
 
     const data = await res.json();
-    console.log("GPT Movie List:", data.text);
+    // console.log("GPT Movie List:", data.text);
     const GEM_MOVIE_LIST = data.text.split(",");
 
     const promiseArray = GEM_MOVIE_LIST.map((movie) =>
