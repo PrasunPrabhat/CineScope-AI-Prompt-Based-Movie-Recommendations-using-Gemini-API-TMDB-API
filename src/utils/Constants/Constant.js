@@ -25,6 +25,4 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "french", name: "Français" },
 ];
 
-export const GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY;
-
 export const TMDB_API_KEY = "334f2d7121aa116b7ee7889a838764e3";
