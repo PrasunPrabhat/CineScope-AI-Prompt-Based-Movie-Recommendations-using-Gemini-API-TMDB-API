@@ -8,7 +8,7 @@ NetflixGPT is a feature-rich, responsive movie streaming web application inspire
 
 ## 📸 Demo
 
-[![Netlify/Vercel Deploy Preview](https://img.shields.io/badge/Live-Demo-green?style=for-the-badge&logo=vercel)](https://cinescope-ai.onrender.com/) <!-- Replace with actual link -->
+[![Netlify/Vercel Deploy Preview](https://img.shields.io/badge/Live-Demo-green?style=for-the-badge&logo=vercel)](https://cine-scope-ai-prompt-based-movie-re.vercel.app/) <!-- Replace with actual link -->
 
 ---
 
